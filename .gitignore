@@ -1,0 +1,16 @@
+# Local app state (remembers last-used dirs on this machine)
+app_settings.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
