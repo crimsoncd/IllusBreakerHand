@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaker Hand</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- ===================== TOP BAR ===================== -->
+  <header class="topbar">
+    <div class="brand">Breaker&nbsp;Hand</div>
+
+    <div class="dir-group">
+      <label>Source
+        <input id="sourceDir" type="text" placeholder="C:\path\to\images" spellcheck="false" />
+        <button id="browseSource" class="btn icon-btn" title="Browse for folder">📁</button>
+      </label>
+      <label>Output
+        <input id="outputDir" type="text" placeholder="C:\path\to\output" spellcheck="false" />
+        <button id="browseOutput" class="btn icon-btn" title="Browse for folder">📁</button>
+      </label>
+      <button id="openBtn" class="btn btn-primary">Open</button>
+    </div>
+
+    <button id="chooseBtn" class="btn" disabled>Choose image ▾</button>
+
+    <div class="spacer"></div>
+    <button id="settingsBtn" class="btn icon-btn" title="Settings">⚙</button>
+  </header>
+
+  <!-- ===================== PROGRESS ===================== -->
+  <div class="progress-wrap">
+    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+    <span id="progressText" class="progress-text">No directory opened</span>
+  </div>
+
+  <!-- ===================== MAIN BODY ===================== -->
+  <main class="body">
+    <!-- LEFT: image + drawing -->
+    <section class="left-pane">
+      <div id="canvasStage" class="canvas-stage">
+        <div id="imageWrap" class="image-wrap">
+          <img id="mainImage" alt="" draggable="false" />
+          <canvas id="overlay"></canvas>
+          <div id="pendingControls" class="pending-controls hidden">
+            <button id="confirmBox" class="mini-btn ok" title="Keep box">✓</button>
+            <button id="cancelBox" class="mini-btn no" title="Discard box">✕</button>
+          </div>
+        </div>
+        <div id="emptyHint" class="empty-hint">Open a source &amp; output directory, then choose an image.</div>
+      </div>
+      <div id="imageMeta" class="image-meta"></div>
+    </section>
+
+    <!-- RIGHT: bbox list -->
+    <aside class="right-pane">
+      <div class="right-head">
+        <span>Boxes</span>
+        <span id="boxCount" class="badge">0</span>
+      </div>
+      <div id="boxList" class="box-list"></div>
+      <div id="boxListEmpty" class="box-list-empty">Draw a rectangle on the image to add a box.</div>
+    </aside>
+  </main>
+
+  <!-- ===================== BOTTOM BAR ===================== -->
+  <footer class="bottombar">
+    <button id="prevBtn" class="btn" disabled>◀ Previous</button>
+    <button id="skipBtn" class="btn" disabled>Skip ▶</button>
+    <button id="toggleBoxesBtn" class="btn" disabled>Hide Boxes</button>
+    <div class="spacer"></div>
+    <span id="saveStatus" class="save-status"></span>
+    <button id="saveBtn" class="btn" disabled>Save</button>
+    <button id="saveNextBtn" class="btn btn-primary" disabled>Save &amp; Next ▶</button>
+  </footer>
+
+  <!-- ===================== IMAGE PICKER MODAL ===================== -->
+  <div id="pickerModal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>Choose an image</span>
+        <button id="pickerClose" class="btn icon-btn">✕</button>
+      </div>
+      <input id="pickerFilter" class="picker-filter" type="text" placeholder="Filter by name…" />
+      <div id="pickerList" class="picker-list"></div>
+    </div>
+  </div>
+
+  <!-- ===================== SETTINGS MODAL ===================== -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-box modal-small">
+      <div class="modal-head">
+        <span>Settings</span>
+        <button id="settingsClose" class="btn icon-btn">✕</button>
+      </div>
+      <div class="settings-row">
+        <label>Theme</label>
+        <select id="themeSelect">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="universe">Universe</option>
+          <option value="sakura">Sakura</option>
+          <option value="forest">Forest</option>
+          <option value="sunset">Sunset</option>
+        </select>
+      </div>
+      <div class="settings-row">
+        <label>Random box colors</label>
+        <input id="randomColors" type="checkbox" />
+      </div>
+      <div class="settings-row">
+        <label>Box line color</label>
+        <input id="lineColor" type="color" value="#ff3b30" />
+      </div>
+      <div class="settings-row">
+        <label>Line width</label>
+        <input id="lineWidth" type="range" min="1" max="6" value="2" />
+        <span id="lineWidthVal">2</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
